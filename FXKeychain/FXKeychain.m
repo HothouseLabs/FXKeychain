@@ -118,7 +118,7 @@
 {
     return [self initWithService:service
                      accessGroup:accessGroup
-                   accessibility:FXKeychainAccessibleWhenUnlocked];
+                   accessibility:FXKeychainAccessibleAfterFirstUnlock];
 }
 
 - (id)initWithService:(NSString *)service
