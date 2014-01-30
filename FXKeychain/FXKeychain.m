@@ -32,7 +32,7 @@
 
 
 #import "FXKeychain.h"
-
+#import "HHLog.h"
 
 #import <Availability.h>
 #if !__has_feature(objc_arc)
@@ -302,7 +302,7 @@
             if ([object respondsToSelector:@selector(objectForKey:)] && object[@"$archiver"])
             {
                 //data represents an NSCoded archive
-                
+                HHError(@"Data represent NSCoded archive. Don't trust it. Key: %@", key);
     #if FXKEYCHAIN_USE_NSCODING
                 
                 //parse as archive
@@ -322,11 +322,13 @@
         if (!object)
         {
              NSLog(@"FXKeychain failed to decode data for key '%@', error: %@", key, error);
+             HHError(@"Failed to decode data for. Key '%@', error: %@", key, error);
         }
         return object;
     }
     else
     {
+        HHError(@"value for key not found. Key: %@", key);
         //no value found
         return nil;
     }
